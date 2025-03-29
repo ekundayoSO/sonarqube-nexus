@@ -1,7 +1,7 @@
 # configured aws provider with proper credentials
 provider "aws" {
-  region     = "us-east-1"
-  profile = "jesmmet_profile" 
+  region     = "us-west-1"
+  profile = "asher" 
 }
 
 
@@ -89,7 +89,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type          = "t2.small"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.tomcat_ec2_security_group.id]
-  key_name               = "pipeline-key"
+  key_name               = "deployment"
    user_data = "${file("install_tomcat.sh")}"
 
   tags = {
