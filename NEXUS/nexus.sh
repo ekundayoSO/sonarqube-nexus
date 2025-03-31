@@ -12,12 +12,33 @@ echo "Creating Nexus user..."
 sudo useradd -m -d /opt/nexus -s /bin/bash nexus || echo "User nexus already exists"
 echo "nexus ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/nexus
 
-echo "Downloading Nexus 3..."
+echo "Downloading the latest stable version of Nexus 3..."
 cd /opt
-sudo wget -O nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz
+NEXUS_VERSION="3.66.0-02"  # Update if needed
+NEXUS_DIR="nexus-${NEXUS_VERSION}"
+sudo wget -O nexus.tar.gz "https://download.sonatype.com/nexus/3/${NEXUS_DIR}-unix.tar.gz"
+
+echo "Extracting Nexus..."
 sudo tar -xvzf nexus.tar.gz
-sudo mv nexus-3.* nexus
+
+# Remove the existing 'nexus' directory if it exists
+if [ -d "/opt/nexus" ]; then
+    echo "Removing existing /opt/nexus directory..."
+    sudo rm -rf /opt/nexus
+fi
+
+# Rename the extracted directory to 'nexus'
+sudo mv "${NEXUS_DIR}" nexus
+
+# Ensure correct permissions
+sudo mkdir -p /opt/sonatype-work
 sudo chown -R nexus:nexus /opt/nexus /opt/sonatype-work
+
+echo "Ensuring Nexus bin directory exists..."
+if [ ! -d "/opt/nexus/bin" ]; then
+    echo "Error: /opt/nexus/bin directory not found. Extraction might have failed."
+    exit 1
+fi
 
 echo "Configuring Nexus to run as a service..."
 echo 'run_as_user="nexus"' | sudo tee /opt/nexus/bin/nexus.rc
