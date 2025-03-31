@@ -14,7 +14,7 @@ echo "nexus ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/nexus
 
 echo "Downloading the latest stable version of Nexus 3..."
 cd /opt
-NEXUS_VERSION="3.68.1"  # Update if needed
+NEXUS_VERSION="3.66.0-02"  # Update if needed
 NEXUS_DIR="nexus-${NEXUS_VERSION}"
 sudo wget -O nexus.tar.gz "https://download.sonatype.com/nexus/3/${NEXUS_DIR}-unix.tar.gz"
 
