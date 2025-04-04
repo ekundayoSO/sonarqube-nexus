@@ -1,6 +1,6 @@
 #!/bin/sh
 sudo apt update -y
-sudo apt install openjdk-11-jdk -y
+sudo apt install openjdk-17-jdk -y
 sudo apt-get install tomcat9 tomcat9-docs tomcat9-admin -y
 sudo cp -r /usr/share/tomcat9-admin/* /var/lib/tomcat9/webapps/ -v
 sudo chmod 777 /var/lib/tomcat9/conf/tomcat-users.xml
