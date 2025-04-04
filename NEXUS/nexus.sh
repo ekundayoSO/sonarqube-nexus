@@ -5,8 +5,8 @@ set -e  # Exit immediately if a command fails
 echo "Updating system packages..."
 sudo apt update -y && sudo apt upgrade -y
 
-echo "Installing Java 17 (OpenJDK 17)..."
-sudo apt install openjdk-17-jdk -y
+echo "Installing Java 8 (OpenJDK 8)..."
+sudo apt install openjdk-8-jdk -y
 
 echo "Creating Nexus user..."
 sudo useradd -m -d /opt/nexus -s /bin/bash nexus || echo "User nexus already exists"
