@@ -5,6 +5,9 @@ set -e  # Exit immediately if a command fails
 echo "Updating system packages..."
 sudo apt update -y && sudo apt upgrade -y
 
+# Create directory if it doesn't exist
+sudo mkdir -p /opt
+
 echo "Installing Java 8 (OpenJDK 8)..."
 sudo apt install openjdk-8-jdk -y
 
