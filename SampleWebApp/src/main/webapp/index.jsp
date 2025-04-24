@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xml:lang="en">
   <head>
     <title>Welcome to my web page</title>
   </head>
