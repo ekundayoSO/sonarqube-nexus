@@ -20,7 +20,7 @@ pipeline {
         stage('Code Qualty Scan') {
 
            steps {
-                  withSonarQubeEnv('sonar_scanner') {
+                  withSonarQubeEnv('sonar_server') {
  
 
              sh "mvn -f SampleWebApp/pom.xml sonar:sonar"      
@@ -40,7 +40,7 @@ pipeline {
         }    
         stage('deploy to tomcat') {
           steps {
-             deploy adapters: [tomcat9(credentialsId: 'tompass', path: '', url: 'http://54.175.55.68:8080/')], contextPath: 'monolithicApp', war: '**/*.war'
+             deploy adapters: [tomcat9(credentialsId: 'tompass', path: '', url: 'http://3.84.176.190:8080/')], contextPath: 'monolithicApp', war: '**/*.war'
                           
               
           }

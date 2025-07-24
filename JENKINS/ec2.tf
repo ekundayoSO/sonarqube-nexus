@@ -1,7 +1,7 @@
 # configured aws provider with proper credentials
 provider "aws" {
   region    = "us-east-1"
-  profile   = "default"
+  profile   = "duniola"
 }
 
 
@@ -20,7 +20,7 @@ data "aws_availability_zones" "available_zones" {}
 
 # create default subnet if one does not exit
 resource "aws_default_subnet" "default_az1" {
-  availability_zone = data.aws_availability_zones.available_zones.names[0]
+  availability_zone = data.aws_availability_zones.available_zones.names[1]
 
   tags   = {
     Name = "default subnet"
@@ -106,7 +106,7 @@ resource "aws_instance" "ec2_instance" {
   instance_type          = "t2.small"
   subnet_id              = aws_default_subnet.default_az1.id
   vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
-  key_name               = "bada"
+  key_name               = "duniola-keypair"
   user_data = "${file("install_jenkins.sh")}"
 
   tags = {
