@@ -34,14 +34,13 @@ pipeline {
         }
         stage('push to nexus') {
             steps {
-              nexusArtifactUploader artifacts: [[artifactId: 'SampleWebApp', classifier: '', file: 'SampleWebApp/target/SampleWebApp.war', type: 'war']], credentialsId: 'nexuspass', groupId: 'SampleWebApp', nexusUrl: 'http://ec2-54-242-0-134.compute-1.amazonaws.com:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
-            
+              nexusArtifactUploader artifacts: [[artifactId: 'SimpleWebApp', classifier: '', file: 'SimpleWebApp/target/SimpleWebApp.war', type: 'war']], credentialsId: 'nexuspass', groupId: 'SampleWebApp', nexusUrl: 'ec2-54-82-1-118.compute-1.amazonaws.com:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0'   
         }
         }    
         stage('deploy to tomcat') {
           steps {
-             deploy adapters: [tomcat9(credentialsId: 'tompass', path: '', url: 'http://3.84.176.190:8080/')], contextPath: 'monolithicApp', war: '**/*.war'
-                          
+             deploy adapters: [tomcat9(credentialsId: 'tompass', path: '', url: 'http://54.87.140.145:8080/')], contextPath: 'myapp', war: '**/*.war'
+            // deploy adapters: [tomcat9(credentialsId: 'tompass', path: '', url: 'http://3.84.176.190:8080/')], contextPath: 'monolithicApp', war: '**/*.war'               
               
           }
             
